@@ -8,8 +8,19 @@ void setup()
     Serial.begin(9600);
     BTserial.begin(38400); //default baud rate
 }
- 
+char c=' ';
 void loop()
 {
-  
+  if (BTserial.available())
+    {  
+        c = BTserial.read();
+        Serial.write(c);
+    }
+ 
+    // Keep reading from Arduino Serial Monitor and send to HC-05
+    if (Serial.available())
+    {
+        c =  Serial.read();
+        BTserial.write(c);  
+    }
 }
